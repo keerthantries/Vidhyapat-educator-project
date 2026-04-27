@@ -1,0 +1,20 @@
+/**
+ * styles/index.css — Global Style Entry Point
+ * ─────────────────────────────────────────────────────────────
+ * Import order is strict:
+ *   1. tokens  → CSS variables only, no output
+ *   2. base    → global resets + Bootstrap overrides
+ *
+ * Component/page CSS files are co-located and imported
+ * inside their own .jsx files — NOT here.
+ *
+ * HOW TO ADD NEW STYLES:
+ *   New component? → ComponentName.css next to ComponentName.jsx
+ *   New page?      → PageName.css next to PageName.jsx
+ *   New global?    → Add to base.css only if truly global
+ *   New value?     → Add token to tokens.css, then use var()
+ * ─────────────────────────────────────────────────────────────
+ */
+
+@import './tokens.css';
+@import './base.css';

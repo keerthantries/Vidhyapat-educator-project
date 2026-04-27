@@ -1,0 +1,125 @@
+/**
+ * tokens.css — Design Tokens (Single Source of Truth)
+ * ─────────────────────────────────────────────────────────────
+ * RULE: Never hardcode any color, size, spacing, or radius anywhere.
+ * Always reference a token: color: var(--color-primary)
+ *
+ * To retheme the entire app → change values here only.
+ * ─────────────────────────────────────────────────────────────
+ */
+
+:root {
+  /* ── Brand ─────────────────────────────────── */
+  --color-primary: #1a56db;
+  --color-primary-dark: #1040b0;
+  --color-primary-light: #e8efff;
+  --color-primary-muted: rgba(26, 86, 219, 0.1);
+  --color-primary-subtle: rgba(26, 86, 219, 0.06);
+
+  /* ── Gradient Palette ──────────────────────── */
+  --gradient-primary: linear-gradient(135deg, #1a56db 0%, #3b82f6 100%);
+  --gradient-surface: linear-gradient(160deg, #ffffff 0%, #f5f7ff 100%);
+  --gradient-hero: linear-gradient(135deg, #e8efff 0%, #f5f7ff 60%, #eef2ff 100%);
+  --gradient-card-top: linear-gradient(180deg, rgba(26, 86, 219, 0.04) 0%, transparent 100%);
+
+  /* ── Neutrals ──────────────────────────────── */
+  --color-text: #0f1729;
+  --color-text-secondary: #6b7a99;
+  --color-text-muted: #9aa3b8;
+  --color-border: #d0d8ea;
+  --color-border-light: #eaf0fb;
+  --color-bg: #f5f7ff;
+  --color-bg-input: #f8faff;
+  --color-bg-elevated: #ffffff;
+  --color-white: #ffffff;
+
+  /* ── Semantic ──────────────────────────────── */
+  --color-success: #16a34a;
+  --color-success-bg: #f0fdf4;
+  --color-success-border: #bbf7d0;
+  --color-danger: #dc2626;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+  --color-warning: #d97706;
+  --color-warning-bg: #fffbeb;
+  --color-warning-border: #fed7aa;
+  --color-info: #0284c7;
+  --color-info-bg: #f0f9ff;
+  --color-info-border: #bae6fd;
+
+  /* ── Typography ────────────────────────────── */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-md: 16px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 30px;
+  --text-3xl: 36px;
+
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-loose: 1.7;
+
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.08em;
+
+  /* ── Spacing ───────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Radius ────────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 9px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-pill: 100px;
+
+  /* ── Shadows ───────────────────────────────── */
+  --shadow-xs: 0 1px 2px rgba(10, 28, 80, 0.04);
+  --shadow-sm: 0 1px 4px rgba(10, 28, 80, 0.06), 0 1px 2px rgba(10, 28, 80, 0.04);
+  --shadow-md: 0 4px 16px rgba(10, 28, 80, 0.08), 0 1px 4px rgba(10, 28, 80, 0.04);
+  --shadow-lg: 0 8px 32px rgba(10, 28, 80, 0.10), 0 2px 8px rgba(10, 28, 80, 0.06);
+  --shadow-xl: 0 16px 48px rgba(10, 28, 80, 0.12), 0 4px 16px rgba(10, 28, 80, 0.07);
+  --shadow-btn: 0 4px 14px rgba(26, 86, 219, 0.28);
+  --shadow-btn-hover: 0 6px 20px rgba(26, 86, 219, 0.38);
+  --shadow-focus: 0 0 0 3px var(--color-primary-muted);
+  --shadow-card-hover: 0 12px 40px rgba(10, 28, 80, 0.12), 0 2px 8px rgba(10, 28, 80, 0.06);
+
+  /* ── Transitions ───────────────────────────── */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
+  --transition-bounce: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Z-index ───────────────────────────────── */
+  --z-base: 1;
+  --z-above: 10;
+  --z-overlay: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+
+  /* ── Layout ────────────────────────────────── */
+  --sidebar-width: 240px;
+  --topbar-height: 60px;
+  --login-panel-width: 480px;
+  --container-max: 1280px;
+}
