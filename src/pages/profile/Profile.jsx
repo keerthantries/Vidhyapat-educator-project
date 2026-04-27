@@ -1,7 +1,28 @@
 import React, { useState, useEffect } from 'react'
+import {
+  Mail, GraduationCap, Briefcase, Globe,
+  ExternalLink, Shield, Languages, Clock,
+  CheckCircle, AlertCircle, FileText
+} from 'lucide-react'
 import { getDashboardSummary } from '@/services/profile.service'
 import DocumentManager from './components/DocumentManager'
 import './Profile.css'
+
+/* ── Detail Row ──────────────────────────────── */
+function DetailRow({ icon: Icon, label, value }) {
+  if (!value && value !== 0) return null
+  return (
+    <div className="profile-detail-row">
+      <div className="profile-detail-icon">
+        <Icon size={14} strokeWidth={1.8} />
+      </div>
+      <div>
+        <div className="detail-label">{label}</div>
+        <div className="detail-value mt-1">{value}</div>
+      </div>
+    </div>
+  )
+}
 
 export default function Profile() {
   const [profileData, setProfileData] = useState(null)
@@ -12,11 +33,9 @@ export default function Profile() {
   const fetchProfile = async () => {
     try {
       const res = await getDashboardSummary()
-      if (res.success && res.data?.profile) {
-        setProfileData(res.data.profile)
-      }
-    } catch (error) {
-      console.error('Failed to fetch profile', error)
+      if (res.success && res.data?.profile) setProfileData(res.data.profile)
+    } catch (err) {
+      console.error('Failed to fetch profile', err)
     } finally {
       setLoading(false)
     }
@@ -34,81 +53,125 @@ export default function Profile() {
     )
   }
 
-  const { name, email, verificationStatus, educatorProfile } = profileData
+  const { name, email, verificationStatus, educatorProfile: ep = {} } = profileData
   const initial = name?.charAt(0).toUpperCase() || 'U'
   const isVerified = verificationStatus === 'approved'
 
   return (
     <div className="container-lg py-4">
 
-      {/* Profile Card */}
+      {/* ── Hero Card ── */}
       <div className="card mb-4" style={{ overflow: 'hidden' }}>
-        <div className="profile-banner" />
 
-        <div className="card-body">
+        {/* Banner */}
+        <div className="profile-banner">
+          <div className="profile-banner-pattern" />
+        </div>
 
-          {/* Avatar + Name */}
-          <div className="d-flex align-items-end gap-4 mb-5">
-            <div className="profile-avatar">{initial}</div>
-            <div className="pb-1">
-              <h4 className="page-title mb-1">
-                {name}
-                {isVerified && <span className="badge bg-success ms-2 align-middle" style={{ fontSize: 11 }}>✓ Verified</span>}
-              </h4>
-              <p className="page-subtitle mb-0">{educatorProfile?.title || 'Educator'}</p>
+        <div className="card-body pt-0">
+          {/* Avatar row */}
+          <div className="profile-hero-row">
+            <div className="profile-avatar-wrap">
+              <div className="profile-avatar">{initial}</div>
+            </div>
+            <div className="profile-hero-info">
+              <div className="d-flex align-items-center gap-2 flex-wrap">
+                <h2 className="page-title mb-0">{name}</h2>
+                {isVerified
+                  ? <span className="badge bg-success d-flex align-items-center gap-1" style={{ fontSize: 11 }}>
+                    <CheckCircle size={10} strokeWidth={2.5} /> Verified
+                  </span>
+                  : <span className="badge bg-warning text-dark d-flex align-items-center gap-1" style={{ fontSize: 11 }}>
+                    <AlertCircle size={10} strokeWidth={2.5} /> Pending
+                  </span>
+                }
+              </div>
+              <p className="page-subtitle mt-1 mb-0">{ep.title || 'Educator'}</p>
+              {/* External links */}
+              <div className="d-flex gap-2 mt-3 flex-wrap">
+                {ep.linkedinUrl &&
+                  <a href={ep.linkedinUrl} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-primary">
+                    <Globe size={13} /> LinkedIn
+                  </a>
+                }
+                {ep.portfolioUrl &&
+                  <a href={ep.portfolioUrl} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-secondary">
+                    <ExternalLink size={13} /> Portfolio
+                  </a>
+                }
+              </div>
             </div>
           </div>
 
-          <div className="row g-4">
+          {/* ── 3-column layout below avatar ── */}
+          <div className="row g-4 mt-1">
 
-            {/* Left: Bio + Expertise */}
-            <div className="col-lg-7">
+            {/* Col 1 — About + Expertise */}
+            <div className="col-lg-5">
               <p className="section-label">About</p>
-              <p className="text-secondary mb-4" style={{ lineHeight: 'var(--leading-loose)' }}>
-                {educatorProfile?.bio || <span className="text-muted fst-italic">No bio provided.</span>}
+              <p style={{ color: 'var(--color-text-secondary)', lineHeight: 'var(--leading-loose)', fontSize: 'var(--text-sm)', marginBottom: 'var(--space-5)' }}>
+                {ep.bio || <span className="text-muted fst-italic">No bio provided.</span>}
               </p>
 
-              {educatorProfile?.expertiseAreas?.length > 0 && (
+              {ep.expertiseAreas?.length > 0 && (
                 <>
-                  <p className="section-label">Expertise</p>
+                  <p className="section-label">Expertise Areas</p>
                   <div className="d-flex flex-wrap gap-2">
-                    {educatorProfile.expertiseAreas.map((area, idx) => (
-                      <span key={idx} className="expertise-badge">{area}</span>
+                    {ep.expertiseAreas.map((area, i) => (
+                      <span key={i} className="expertise-badge">{area}</span>
                     ))}
                   </div>
                 </>
               )}
             </div>
 
-            {/* Right: Details */}
-            <div className="col-lg-5">
+            {/* Col 2 — Languages + Work Type */}
+            <div className="col-lg-3">
+              {ep.languages?.length > 0 && (
+                <div className="mb-4">
+                  <p className="section-label">Languages</p>
+                  <div className="d-flex flex-wrap gap-2">
+                    {ep.languages.map((lang, i) => (
+                      <span key={i} className="badge"
+                        style={{ background: 'var(--color-info-bg)', color: 'var(--color-info)', fontSize: 12, padding: '4px 12px' }}>
+                        {lang}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {ep.workType && (
+                <div className="mb-4">
+                  <p className="section-label">Work Type</p>
+                  <span className="badge"
+                    style={{ background: 'var(--color-success-bg)', color: 'var(--color-success)', fontSize: 12, padding: '4px 12px' }}>
+                    {ep.workType === 'fullTime' ? 'Full Time' : ep.workType === 'partTime' ? 'Part Time' : ep.workType}
+                  </span>
+                </div>
+              )}
+
+              <p className="section-label">Verification</p>
+              {isVerified
+                ? <span className="badge bg-success">✓ Verified Educator</span>
+                : <span className="badge bg-warning text-dark">Pending Verification</span>
+              }
+            </div>
+
+            {/* Col 3 — Contact Details */}
+            <div className="col-lg-4">
               <div className="surface-primary p-4">
-                <p className="section-label mb-4">Contact & Details</p>
-
-                <div className="mb-4">
-                  <div className="detail-label">Email</div>
-                  <div className="detail-value">{email}</div>
-                </div>
-
-                <div className="mb-4">
-                  <div className="detail-label">Qualification</div>
-                  <div className="detail-value">{educatorProfile?.highestQualification || <span className="text-muted">N/A</span>}</div>
-                </div>
-
-                <div className="mb-4">
-                  <div className="detail-label">Experience</div>
-                  <div className="detail-value">
-                    {educatorProfile?.yearsOfExperience ? `${educatorProfile.yearsOfExperience} Years` : <span className="text-muted">N/A</span>}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="detail-label">Status</div>
-                  <div className="detail-value">
-                    {isVerified
-                      ? <span className="badge bg-success">Verified Educator</span>
-                      : <span className="badge bg-warning text-dark">Pending Verification</span>}
-                  </div>
+                <p className="section-label mb-3">Contact & Details</p>
+                <div className="d-flex flex-column gap-3">
+                  <DetailRow icon={Mail} label="Email" value={email} />
+                  <DetailRow icon={GraduationCap} label="Qualification" value={ep.highestQualification} />
+                  <DetailRow
+                    icon={Briefcase}
+                    label="Experience"
+                    value={ep.yearsOfExperience ? `${ep.yearsOfExperience} years` : null}
+                  />
+                  {ep.languages?.length > 0 &&
+                    <DetailRow icon={Languages} label="Languages" value={ep.languages.join(', ')} />}
                 </div>
               </div>
             </div>
@@ -117,8 +180,9 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Document Manager */}
+      {/* ── Documents ── */}
       <DocumentManager />
+
     </div>
   )
 }

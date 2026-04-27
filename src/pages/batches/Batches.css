@@ -1,0 +1,61 @@
+/* ── Batches.css ─────────────────────────────────
+   Co-located with Batches.jsx
+──────────────────────────────────────────────── */
+
+/* ── Card stripe ──────────────────────────────── */
+.batch-card {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.batch-card-stripe {
+    height: 4px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+/* ── Code badge ───────────────────────────────── */
+.batch-code {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: var(--font-semibold);
+    padding: 1px 7px;
+    border-radius: 4px;
+    background: var(--color-primary-subtle);
+    color: var(--color-primary);
+    letter-spacing: 0.02em;
+}
+
+/* ── Course tag ───────────────────────────────── */
+.batch-course-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: var(--font-medium);
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Day pill ─────────────────────────────────── */
+.batch-day-pill {
+    font-size: 10px;
+    font-weight: var(--font-semibold);
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: var(--color-border-light);
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.batch-day-pill.active {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
