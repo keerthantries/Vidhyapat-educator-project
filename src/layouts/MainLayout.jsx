@@ -1,9 +1,13 @@
-import React from 'react';
-import { Outlet, NavLink, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { getUser, clearSession } from '../utils/auth.utils';
 import './MainLayout.css';
 
 const MainLayout = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const user = getUser();
 
   // Dynamic header title based on current path
   const getPageTitle = () => {
@@ -17,6 +21,11 @@ const MainLayout = () => {
       default:
         return 'Dashboard';
     }
+  };
+
+  const handleLogout = () => {
+    clearSession();
+    navigate('/login');
   };
 
   return (
@@ -59,12 +68,23 @@ const MainLayout = () => {
             <h3>{getPageTitle()}</h3>
           </div>
           <div className="header-right">
-            <div className="user-profile">
-              <span>Educator user</span>
+            <div className="user-profile-container">
+              <div
+                className="user-profile"
+                onClick={() => setShowDropdown(!showDropdown)}
+              >
+                <span>{user?.name || user?.firstName || user?.email || 'Educator'}</span>
+              </div>
+              {showDropdown && (
+                <div className="profile-dropdown">
+                  <button onClick={handleLogout} className="logout-btn">
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </header>
-
         {/* Page Content */}
         <main className="page-content">
           <Outlet />

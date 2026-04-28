@@ -121,7 +121,7 @@ function BatchTableRow({ batch, onClick }) {
             style={{ fontSize: 11, padding: '4px 12px', whiteSpace: 'nowrap' }}>
             <Video size={11} strokeWidth={2} /> Join
           </a>
-          : <span className="text-muted text-xs">—</span>
+          : <span className="text-muted text-xs">no link</span>
         }
       </td>
     </tr>
@@ -281,7 +281,7 @@ export default function Dashboard() {
                   </thead>
                   <tbody>
                     {filteredBatches.map(b => (
-                      <BatchTableRow key={b._id} batch={b} onClick={() => navigate(`/batches/${b._id}`)} />
+                      <BatchTableRow key={b._id} batch={b} />
                     ))}
                   </tbody>
                 </table>

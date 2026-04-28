@@ -41,6 +41,39 @@
   flex: 1;
 }
 
+.user-profile-container {
+  position: relative;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  min-width: 120px;
+  z-index: 1000;
+  padding: 12px;
+  margin-top: 10px;
+}
+
+.profile-dropdown .logout-btn {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #f1f3f5;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-dropdown .logout-btn:hover {
+  background-color: #e9ecef;
+}
+
 .sidebar-nav ul {
   list-style: none;
   padding: 0;

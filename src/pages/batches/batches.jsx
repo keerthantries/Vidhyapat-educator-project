@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
     BookOpen, Clock, Users, Calendar, Globe, Monitor,
-    MapPin, ExternalLink, ChevronLeft, Search, X,
+    MapPin, ExternalLink, Search, X,
     CheckCheck, Timer, Video, Code
 } from 'lucide-react'
 import { getMyBatches } from '@/services/api/dashboard.api.js'
@@ -302,9 +302,7 @@ export default function Batches() {
             <div className="page-header d-flex justify-content-between align-items-start flex-wrap gap-3">
                 <div>
                     <div className="d-flex align-items-center gap-2 mb-1">
-                        <button className="btn btn-sm btn-outline-secondary" style={{ padding: '4px 10px' }} onClick={() => navigate('/')}>
-                            <ChevronLeft size={14} />
-                        </button>
+
                         <h1 className="page-title mb-0">My Batches</h1>
                     </div>
                     <p className="page-subtitle">{batches.length} total batches</p>
