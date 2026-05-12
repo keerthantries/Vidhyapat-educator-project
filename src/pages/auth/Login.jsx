@@ -1,27 +1,33 @@
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { educatorLogin } from '@/services/auth.api'
 import { saveSession } from '@/utils/auth.utils'
 import './Login.css'
 
 const SLIDES = [
   {
-    img: 'https://res.cloudinary.com/doqbjnliq/image/upload/iStock-1168910967_tsxd9a.jpg',
+    img: 'https://res.cloudinary.com/doqbjnliq/image/upload/v1778493710/c0334a40-f25a-47a7-ba69-6c06050913b0_pzlbij.jpg',
     tag: 'Vidhyapat LMS',
     title: 'Empowering Educators,\nInspiring Learners',
     sub: 'A modern learning platform built for institutions that believe in the power of great teaching.',
   },
   {
-    img: 'https://res.cloudinary.com/doqbjnliq/image/upload/International-students-236-2048x1365_xgemfh.jpg',
+    img: 'https://res.cloudinary.com/doqbjnliq/image/upload/v1778493715/50ad9d40-2822-4d1e-9845-e1bc54881c9e_htil6k.jpg',
     tag: 'Global Reach',
     title: 'Education Without\nBoundaries',
     sub: 'Serve learners across geographies with multi-tenant architecture and localised content delivery.',
   },
   {
-    img: 'https://res.cloudinary.com/doqbjnliq/image/upload/loginpage_ubv6op.jpg',
+    img: 'https://res.cloudinary.com/doqbjnliq/image/upload/v1778493696/180961d2-989d-42ff-8d85-359f0b447a83_g1jqcd.jpg',
     tag: 'Live Classes',
     title: 'Real-Time Teaching,\nReal Impact',
     sub: 'Schedule, manage, and deliver live video classes with seamless tools built for educators.',
+  },
+  {
+    img: 'https://res.cloudinary.com/doqbjnliq/image/upload/v1778493717/9640299d-4e7f-4c8c-9b83-a2a0e697f261_pjrg6b.jpg',
+    tag: 'Advanced Analytics',
+    title: 'Data-Driven\nExcellence',
+    sub: 'Gain deep insights into student performance and engagement with comprehensive reporting tools.',
   },
 ]
 
@@ -30,10 +36,10 @@ const INITIAL_FORM = { orgSlug: 'vidhyapat-dev', email: '', password: '' }
 export default function Login() {
   const nav = useNavigate()
 
-  const [form, setForm]             = useState(INITIAL_FORM)
-  const [loading, setLoading]       = useState(false)
-  const [error, setError]           = useState('')
-  const [showPw, setShowPw]         = useState(false)
+  const [form, setForm] = useState(INITIAL_FORM)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [showPw, setShowPw] = useState(false)
   const [activeSlide, setActiveSlide] = useState(0)
   const timerRef = useRef(null)
 
@@ -123,10 +129,10 @@ export default function Login() {
       <div className="vp-login-panel d-flex flex-column justify-content-center bg-white px-5 py-4 shadow-sm">
 
         <img
-          src="https://res.cloudinary.com/doqbjnliq/image/upload/logoblue_qy56iu.png"
+          src="https://res.cloudinary.com/doqbjnliq/image/upload/logoblue2_t5elbf.png"
           alt="Vidhyapat"
           className="mb-4"
-          style={{ height: 36, objectFit: 'contain', width: 'fit-content' }}
+          style={{ height: 60, objectFit: 'contain', width: 'fit-content' }}
         />
 
         <h3 className="vp-login-heading fw-bold mb-1">Welcome back</h3>
@@ -187,23 +193,27 @@ export default function Login() {
                 onClick={() => setShowPw((p) => !p)}
                 tabIndex={-1}
               >
-                {showPw ? '🙈' : '👁'}
+                {showPw ? '👁' : '👁'}
               </button>
             </div>
           </div>
 
           <button
             type="submit"
-            className="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2 py-3"
+            className="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2 py-3 mb-4"
             disabled={loading}
           >
             {loading && <span className="vp-btn-spinner" />}
             {loading ? 'Signing in…' : 'Sign In'}
           </button>
 
+          <p className="text-center text-muted text-sm mb-0">
+            Don't have an account? <Link to="/signup" className="text-primary fw-semibold text-decoration-none">Sign up</Link>
+          </p>
+
         </form>
 
-        <p className="text-center text-muted mt-4 mb-0 text-xs" style={{ lineHeight: 'var(--leading-loose)' }}>
+        <p className="text-center text-muted mt-5 mb-0 text-xs" style={{ lineHeight: 'var(--leading-loose)' }}>
           Protected by Vidhyapat security.<br />
           Forgot your password? Contact your administrator.
         </p>

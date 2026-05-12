@@ -59,3 +59,47 @@
     background: var(--color-primary);
     color: var(--color-white);
 }
+
+/* ── Course pill button (in creation modal) ── */
+.batch-course-pill-btn {
+    font-size: 11px;
+    font-weight: var(--font-medium);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border-light);
+    background: var(--color-white);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.batch-course-pill-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.batch-course-pill-btn.active {
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    border-color: var(--color-primary);
+    font-weight: var(--font-semibold);
+}
+
+/* Spinner animation */
+.ob-spin {
+    animation: ob-spin 1s linear infinite;
+}
+@keyframes ob-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Modal form specifics */
+.modal-header .modal-title {
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+.surface-primary {
+    background: var(--color-bg);
+}

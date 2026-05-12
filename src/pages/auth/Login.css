@@ -23,22 +23,25 @@
   opacity: 0;
   transition: opacity var(--transition-slow);
 }
-.vp-slide.active { opacity: 1; }
+
+.vp-slide.active {
+  opacity: 1;
+}
 
 .vp-slide::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(10, 28, 80, 0.72),
-    rgba(26, 86, 219, 0.35)
-  );
+  background: linear-gradient(135deg,
+      rgba(10, 28, 80, 0.72),
+      rgba(26, 86, 219, 0.35));
 }
 
 .vp-slide-content {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: var(--z-above);
   padding: var(--space-10) var(--space-12);
 }
@@ -55,30 +58,47 @@
 /* ── Carousel arrows ──────────────────────── */
 .vp-arrow {
   position: absolute;
-  top: 50%; transform: translateY(-50%);
+  top: 50%;
+  transform: translateY(-50%);
   z-index: var(--z-above);
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: var(--color-white);
-  width: 38px; height: 38px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: var(--text-md);
   transition: background var(--transition-fast);
 }
-.vp-arrow:hover { background: rgba(255, 255, 255, 0.3); }
-.vp-arrow-prev { left: 18px; }
-.vp-arrow-next { right: 18px; }
+
+.vp-arrow:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.vp-arrow-prev {
+  left: 18px;
+}
+
+.vp-arrow-next {
+  right: 18px;
+}
 
 /* ── Carousel dots ────────────────────────── */
 .vp-dot {
-  width: 9px; height: 9px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.4);
-  border: none; cursor: pointer; padding: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0;
   transition: background var(--transition-normal), transform var(--transition-normal);
 }
+
 .vp-dot.active {
   background: var(--color-white);
   transform: scale(1.35);
@@ -90,6 +110,12 @@
   width: var(--login-panel-width);
   min-width: 400px;
   overflow-y: auto;
+}
+
+/* Signup needs more room for its multi-step form */
+.vp-login-panel.vp-signup-panel {
+  width: 480px;
+  min-width: 440px;
 }
 
 .vp-login-heading {
@@ -105,7 +131,9 @@
 /* Icon absolutely positioned inside input wrapper */
 .vp-input-icon {
   position: absolute;
-  left: 12px; top: 50%; transform: translateY(-50%);
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--color-text-muted);
   pointer-events: none;
   display: flex;
@@ -115,25 +143,84 @@
 /* Show/hide password toggle inside input */
 .vp-pw-toggle {
   position: absolute;
-  right: 12px; top: 50%; transform: translateY(-50%);
-  background: none; border: none; cursor: pointer;
-  color: var(--color-text-muted); padding: 0;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 0;
   z-index: var(--z-above);
 }
 
 /* Loading spinner — animation, no Bootstrap equivalent */
 .vp-btn-spinner {
-  width: 16px; height: 16px;
+  width: 16px;
+  height: 16px;
   border: 2px solid rgba(255, 255, 255, 0.35);
   border-top-color: var(--color-white);
   border-radius: 50%;
   flex-shrink: 0;
   animation: vp-spin 0.7s linear infinite;
 }
-@keyframes vp-spin { to { transform: rotate(360deg); } }
+
+@keyframes vp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Signup Glassmorphism ─────────────────── */
+.vp-signup-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* Align to left */
+  min-height: 100vh;
+  width: 100%;
+  padding-left: 5%;
+  /* Space from edge */
+}
+
+.vp-signup-glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-2xl);
+  width: 100%;
+  max-width: 540px;
+  padding: var(--space-12);
+  z-index: var(--z-above);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.12);
+}
+
+.vp-full-carousel {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
 
 /* ── Responsive ───────────────────────────── */
 @media (max-width: 768px) {
-  .vp-carousel-panel { display: none !important; }
-  .vp-login-panel    { width: 100% !important; min-width: unset !important; }
+  .vp-carousel-panel {
+    display: none !important;
+  }
+
+  .vp-login-panel {
+    width: 100% !important;
+    min-width: unset !important;
+  }
+
+  .vp-signup-container {
+    padding-left: 0;
+    justify-content: center;
+  }
+
+  .vp-signup-glass {
+    max-width: 92% !important;
+    padding: var(--space-8) !important;
+    border-radius: var(--radius-xl);
+  }
 }

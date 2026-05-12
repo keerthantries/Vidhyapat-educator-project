@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   BookOpen, Users, CalendarCheck, TrendingUp,
   Clock, CalendarDays, ArrowRight, CheckCircle2,
-  AlertCircle, Video, LayoutGrid
+  AlertCircle, Video, LayoutGrid, ShieldCheck
 } from 'lucide-react'
 import { getDashboardSummary, getMyBatches, getCalendarEvents } from '@/services/api/dashboard.api.js'
 import './Dashboard.css'
@@ -183,7 +183,7 @@ export default function Dashboard() {
   const { learnerCount } = summary || {}
   const greetName = summary?.profile?.name?.split(' ')[0] || 'Educator'
   const hour = new Date().getHours()
-  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
+  const greeting = hour < 12 ? 'Good morning' : hour < 16 ? 'Good afternoon' : 'Good evening'
 
   const realStats = {
     total: batches.length,
@@ -215,7 +215,27 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* Stat Row */}
+      {/* Verification Reminder Banner */}
+      {summary?.profile?.verificationStatus !== 'approved' && (
+        <div className="dash-verify-banner">
+          <div className="dash-verify-content">
+            <div className="dash-verify-icon">
+              <ShieldCheck size={24} strokeWidth={2} />
+            </div>
+            <div>
+              <div className="dash-verify-title">Complete Your Profile</div>
+              <div className="dash-verify-text">
+                Your account is almost ready. Complete your profile to get verified and start teaching.
+              </div>
+            </div>
+          </div>
+          <div className="dash-verify-action">
+            <button className="dash-verify-btn" onClick={() => navigate('/profile')}>
+              Complete Profile
+            </button>
+          </div>
+        </div>
+      )}
       <div className="row g-3 mb-5">
         <div className="col-6 col-md-3">
           <StatCard label="Total Batches" value={realStats.total}

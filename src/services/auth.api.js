@@ -4,3 +4,8 @@ export const educatorLogin = async (data) => {
   const response = await httpClient.post('/auth/educator/login', data)
   return response.data
 }
+
+export const educatorSignup = async (data) => {
+  const response = await httpClient.post('/auth/educator/signup', data)
+  return response.data
+}

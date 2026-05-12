@@ -22,7 +22,6 @@ const MainLayout = () => {
         return 'Dashboard';
     }
   };
-
   const handleLogout = () => {
     clearSession();
     navigate('/login');
@@ -52,10 +51,16 @@ const MainLayout = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink to="/courses" className={({ isActive }) => (isActive ? 'active' : '')}>
+                Courses
+              </NavLink>
+            </li>
+            <li>
               <NavLink to="/profile" className={({ isActive }) => (isActive ? 'active' : '')}>
                 Profile
               </NavLink>
             </li>
+
           </ul>
         </nav>
       </aside>

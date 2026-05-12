@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
     BookOpen, Clock, Users, Calendar, Globe, Monitor,
     MapPin, ExternalLink, Search, X,
-    CheckCheck, Timer, Video, Code
+    CheckCheck, Timer, Video, Code, Plus, Loader2
 } from 'lucide-react'
 import { getMyBatches } from '@/services/api/dashboard.api.js'
 import './Batches.css'
@@ -263,11 +263,16 @@ export default function Batches() {
     const [search, setSearch] = useState('')
     const [selectedBatch, setSelectedBatch] = useState(null)
 
-    useEffect(() => {
+    const fetchBatches = () => {
+        setLoading(true)
         getMyBatches()
             .then(res => { if (res.success) setBatches(res.data) })
             .catch(err => console.error('Batches error', err))
             .finally(() => setLoading(false))
+    }
+
+    useEffect(() => {
+        fetchBatches()
     }, [])
 
     useEffect(() => {
@@ -301,12 +306,12 @@ export default function Batches() {
             {/* Header */}
             <div className="page-header d-flex justify-content-between align-items-start flex-wrap gap-3">
                 <div>
-                    <div className="d-flex align-items-center gap-2 mb-1">
-
-                        <h1 className="page-title mb-0">My Batches</h1>
-                    </div>
+                    <h1 className="page-title mb-1">My Batches</h1>
                     <p className="page-subtitle">{batches.length} total batches</p>
                 </div>
+                {/* <button className="btn btn-primary d-flex align-items-center gap-2" onClick={() => navigate('/batches/create-new')}>
+                    <Plus size={16} strokeWidth={2.5} /> Create New Batch
+                </button> */}
             </div>
 
             {/* Filter + Search bar */}
